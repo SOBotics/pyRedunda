@@ -43,7 +43,11 @@ class Redunda:
 
         #Read the data from a file to a string.
         if filename.endswith (".pickle") or ispickle==True:
-            dict = pickle.loads(filename)
+            try:
+                dict = pickle.loads(filename)
+            except pickle.PickleError as perr:
+                print ("Pickling error occurred: " + str(perr))
+                return
             filedata = str (data)
         else:
             try:
@@ -74,7 +78,24 @@ class Redunda:
         if response.code != 200:
             print ("Error occured while downloading file '" + filename + "' with error code '" + str (response.code) + ".")
 
-        print (response.read().decode ("utf-8"))
+
+        filedata = str(response.read().decode ("utf-8"))
+
+        try:
+            if filename.endswith (".pickle") or ispickle == True:
+                dict = eval (filename)
+                try:
+                    pickle.dump (dict, filename)
+                except pickle.PickleError as perr:
+                    print ("Pickling error occurred: " + str (perr))
+                    return
+            else:
+                with open (filename, "w") as fileToWrite:
+                    print (filedata, file=fileToWrite)
+        except IOError as ioerr:
+            print ("IOError occurred: " + str (ioerr))
+            return
+
 
 
 
