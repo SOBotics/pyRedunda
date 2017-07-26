@@ -6,10 +6,15 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXFileReference section */
+		755ADAE01F24ABEA00F78B65 /* Redunda.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = Redunda.py; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
 /* Begin PBXGroup section */
 		755ADAD51F24ABC800F78B65 = {
 			isa = PBXGroup;
 			children = (
+				755ADAE01F24ABEA00F78B65 /* Redunda.py */,
 			);
 			sourceTree = "<group>";
 		};
