@@ -96,6 +96,14 @@ class Redunda:
             print ("IOError occurred: " + str (ioerr))
             return
 
+    def uploadFiles (self):
+        for each_file in self.filesToSync:
+            self.uploadFile(each_file ["name"], each_file ["ispickle"])
+
+    def downloadFiles (self):
+        for each_file in self.filesToSync:
+            self.downloadFile (each_file ["name"], each_file ["ispickle"])
+
 
 
 
