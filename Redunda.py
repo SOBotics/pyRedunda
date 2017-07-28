@@ -83,7 +83,7 @@ class Redunda:
 
         try:
             if filename.endswith (".pickle") or ispickle == True:
-                dict = eval (filename)
+                dict = eval (filedata)
                 try:
                     pickle.dump (dict, filename)
                 except pickle.PickleError as perr:
