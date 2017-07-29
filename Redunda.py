@@ -44,7 +44,8 @@ class Redunda:
         #Read the data from a file to a string.
         if filename.endswith(".pickle") or ispickle:
             try:
-                data = pickle.loads(filename)
+                with open(filename, "rb") as fileToRead:
+                    data = pickle.load(fileToRead)
             except pickle.PickleError as perr:
                 print("Pickling error occurred: {}".format(perr))
                 return
@@ -85,7 +86,8 @@ class Redunda:
             if filename.endswith (".pickle") or ispickle == True:
                 data = json.loads(filedata)
                 try:
-                    pickle.dump (data, filename)
+                    with open(filename, "wb") as fileToWrite:
+                        pickle.dump (data, fileToWrite)
                 except pickle.PickleError as perr:
                     print("Pickling error occurred: {}".format(perr))
                     return
