@@ -83,7 +83,7 @@ class Redunda:
         filedata = response.read().decode("utf-8")
 
         try:
-            if filename.endswith (".pickle") or ispickle == True:
+            if filename.endswith (".pickle") or ispickle:
                 data = json.loads(filedata)
                 try:
                     with open(filename, "wb") as fileToWrite:
