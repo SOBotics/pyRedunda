@@ -11,7 +11,7 @@ import json
 import pickle
 
 class Redunda:
-    def __init__ (self, key, filesToSync, version="unknown"):
+    def __init__(self, key, filesToSync, version="unknown"):
         self.key = key
         self.filesToSync = filesToSync
         self.version = version
@@ -19,22 +19,22 @@ class Redunda:
         self.eventCount = 0
         self.shouldStandby = False
 
-    def sendStatusPing (self):
+    def sendStatusPing(self):
         data = parse.urlencode({"key": self.key, "version": self.version}).encode()
-        req = request.Request ("https://redunda.sobotics.org/status.json", data)
+        req = request.Request("https://redunda.sobotics.org/status.json", data)
 
-        response = request.urlopen (req)
+        response = request.urlopen(req)
 
-        jsonReturned = json.loads (response.read().decode("utf-8"))
+        jsonReturned = json.loads(response.read().decode("utf-8"))
 
-        self.location = jsonReturned ["location"]
-        self.shouldStandby = jsonReturned ["should_standby"]
-        self.eventCount = jsonReturned ["event_count"]
+        self.location = jsonReturned["location"]
+        self.shouldStandby = jsonReturned["should_standby"]
+        self.eventCount = jsonReturned["event_count"]
 
-    def uploadFile (self, filename, ispickle=False):
-        print ("Uploading file " + filename + " to Redunda.")
+    def uploadFile(self, filename, ispickle=False):
+        print("Uploading file {} to Redunda.".format(filename))
         
-        url = "https://redunda.sobotics.org/bots/data/" + filename + "?key=" + self.key
+        url = "https://redunda.sobotics.org/bots/data/{}?key={}".format(filename,self.key)
         
         #Set the content type to 'application/octet-stream'
         header = {"Content-type": "application/octet-stream"}
@@ -42,67 +42,67 @@ class Redunda:
         filedata = ""
 
         #Read the data from a file to a string.
-        if filename.endswith (".pickle") or ispickle==True:
+        if filename.endswith(".pickle") or ispickle:
             try:
-                dict = pickle.loads(filename)
+                data = pickle.loads(filename)
             except pickle.PickleError as perr:
-                print ("Pickling error occurred: " + str(perr))
+                print("Pickling error occurred: {}".format(perr))
                 return
-            filedata = str (data)
+            filedata = str(data)
         else:
             try:
-                with open (filename, "r") as fileToRead:
+                with open(filename, "r") as fileToRead:
                     filedata = fileToRead.read()
             except IOError as ioerr:
-                print ("IOError occurred: " + str (ioerr))
+                print("IOError occurred: {}".format(ioerr))
                 return
 
-        requestToMake = request.Request (url, data=filedata.encode ("utf-8"), headers=header)
+        requestToMake = request.Request(url, data=filedata.encode("utf-8"), headers=header)
 
         #Make the request.
-        response = request.urlopen (requestToMake)
+        response = request.urlopen(requestToMake)
 
         if response.code >= 400:
-            print ("Error occurred while uploading file '" + filename + "' with error code " + str (response.code) + ".")
+            print("Error occurred while uploading file '{}' with error code {}.".format(filename,response.code))
 
-    def downloadFile (self, filename, ispickle=False):
-        print ("Downloading file " + filename + " from Redunda.")
+    def downloadFile(self, filename, ispickle=False):
+        print("Downloading file {} from Redunda.".format(filename))
 
-        url = "https://redunda.sobotics.org/bots/data/" + filename + "?key=" + self.key
+        url = "https://redunda.sobotics.org/bots/data/{}?key={}".format(filename,self.key)
 
-        requestToMake = request.Request (url)
+        requestToMake = request.Request(url)
 
         #Make the request.
-        response = request.urlopen (requestToMake)
+        response = request.urlopen(requestToMake)
 
         if response.code != 200:
-            print ("Error occured while downloading file '" + filename + "' with error code '" + str (response.code) + ".")
+            print("Error occured while downloading file '{}' with error code {}.".format(filename,response.code))
 
 
-        filedata = str(response.read().decode ("utf-8"))
+        filedata = str(response.read().decode("utf-8"))
 
         try:
-            if filename.endswith (".pickle") or ispickle == True:
-                dict = eval (filedata)
+            if filename.endswith(".pickle") or ispickle:
+                data = eval(filedata)
                 try:
-                    pickle.dump (dict, filename)
+                    pickle.dump(data, filename)
                 except pickle.PickleError as perr:
-                    print ("Pickling error occurred: " + str (perr))
+                    print("Pickling error occurred: {}".format(perr))
                     return
             else:
-                with open (filename, "w") as fileToWrite:
-                    print (filedata, file=fileToWrite)
+                with open(filename, "w") as fileToWrite:
+                    print(filedata, file=fileToWrite)
         except IOError as ioerr:
-            print ("IOError occurred: " + str (ioerr))
+            print("IOError occurred: {}".format(ioerr))
             return
 
-    def uploadFiles (self):
+    def uploadFiles(self):
         for each_file in self.filesToSync:
-            self.uploadFile(each_file ["name"], each_file ["ispickle"])
+            self.uploadFile(each_file["name"], each_file["ispickle"])
 
-    def downloadFiles (self):
+    def downloadFiles(self):
         for each_file in self.filesToSync:
-            self.downloadFile (each_file ["name"], each_file ["ispickle"])
+            self.downloadFile(each_file["name"], each_file["ispickle"])
 
 
 
