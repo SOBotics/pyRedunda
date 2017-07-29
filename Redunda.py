@@ -48,7 +48,7 @@ class Redunda:
             except pickle.PickleError as perr:
                 print("Pickling error occurred: {}".format(perr))
                 return
-            filedata = str(data)
+            filedata = json.dumps(data)
         else:
             try:
                 with open(filename, "r") as fileToRead:
@@ -79,19 +79,19 @@ class Redunda:
             print("Error occured while downloading file '{}' with error code {}.".format(filename,response.code))
 
 
-        filedata = str(response.read().decode("utf-8"))
+        filedata = response.read().decode("utf-8")
 
         try:
-            if filename.endswith(".pickle") or ispickle:
-                data = eval(filedata)
+            if filename.endswith (".pickle") or ispickle == True:
+                data = json.loads(filedata)
                 try:
-                    pickle.dump(data, filename)
+                    pickle.dump (data, filename)
                 except pickle.PickleError as perr:
                     print("Pickling error occurred: {}".format(perr))
                     return
             else:
-                with open(filename, "w") as fileToWrite:
-                    print(filedata, file=fileToWrite)
+                with open (filename, "w") as fileToWrite:
+                    fileToWrite.write(filedata)
         except IOError as ioerr:
             print("IOError occurred: {}".format(ioerr))
             return
