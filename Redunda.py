@@ -13,6 +13,7 @@ import pickle
 class Redunda:
     def __init__(self, key, filesToSync, version="unknown"):
         self.key = key
+        #'filesToSync' should be a list of dicts, in the format {"name": "<enter name>", "ispickle": <Bool>}
         self.filesToSync = filesToSync
         self.version = version
         self.location = "unknown"
