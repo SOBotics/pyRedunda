@@ -142,4 +142,18 @@ class Redunda:
         for each_file in self.filesToSync:
             self.downloadFile(each_file["name"], each_file["ispickle"])
 
+    def getEvents(self):
+        """
+        Gets all events from Redunda and returns them.
 
+        :returns: Returns a dictionary of the events which were fetched.
+        """
+
+        url = "https://redunda.sobotics.org/events.json"
+        data = parse.urlencode({"key": self.key}).encode()
+
+        req = request.Request(url, data)
+        
+        response = request.urlopen(req)
+
+        return = json.loads(response.read().decode("utf-8"))
