@@ -10,6 +10,7 @@
 from urllib import request, parse
 import json
 import pickle
+import os
 
 class Redunda:
     """
@@ -20,7 +21,7 @@ class Redunda:
         Construct a new 'Redunda' object.
         
         :param str key: The instance key you get from Redunda
-        :param filesToSync: A list of files which you want to sync with Redunda; should be empty if no files should be synced. The list should be made up of dictionaries, in the format '{"name": <enter filename>, "ispickle": <bool>}'
+        :param filesToSync: A list of files which you want to sync with Redunda; should be empty if no files should be synced. The list should be made up of dictionaries, in the format '{"name": <enter filename>, "ispickle": <bool>, "at_home": <bool>}'
         :param str version: Optional variable to tell the version of the bot; is "unknown" by default
         :return: returns nothing
         """
@@ -47,7 +48,7 @@ class Redunda:
         self.shouldStandby = jsonReturned["should_standby"]
         self.eventCount = jsonReturned["event_count"]
 
-    def uploadFile(self, filename, ispickle=False):
+    def uploadFile(self, filename, ispickle=False, athome=False):
         """
         Uploads a single file to Redunda.
 
@@ -63,6 +64,9 @@ class Redunda:
         header = {"Content-type": "application/octet-stream"}
         
         filedata = ""
+
+        if athome:
+            filename = str(os.path.expanduser("~")) + filename
 
         #Read the data from a file to a string.
         if filename.endswith(".pickle") or ispickle:
@@ -89,7 +93,7 @@ class Redunda:
         if response.code >= 400:
             print("Error occurred while uploading file '{}' with error code {}.".format(filename,response.code))
 
-    def downloadFile(self, filename, ispickle=False):
+    def downloadFile(self, filename, ispickle=False, athome=False):
         """
         Downloads a single file from Redunda.
 
@@ -108,6 +112,9 @@ class Redunda:
 
         if response.code != 200:
             print("Error occured while downloading file '{}' with error code {}.".format(filename,response.code))
+
+        if athome:
+            filename = str(os.path.expanduser("~")) + filename
 
 
         filedata = response.read().decode("utf-8")
@@ -133,14 +140,14 @@ class Redunda:
         Uploads all the files in 'filesToSync'
         """
         for each_file in self.filesToSync:
-            self.uploadFile(each_file["name"], each_file["ispickle"])
+            self.uploadFile(each_file["name"], each_file["ispickle"], each_file["at_home"])
 
     def downloadFiles(self):
         """
         Downloads all the files in 'filesToSync'
         """
         for each_file in self.filesToSync:
-            self.downloadFile(each_file["name"], each_file["ispickle"])
+            self.downloadFile(each_file["name"], each_file["ispickle"], each_file["at_home"])
 
     def getEvents(self):
         """
@@ -156,4 +163,4 @@ class Redunda:
         
         response = request.urlopen(req)
 
-        return = json.loads(response.read().decode("utf-8"))
+        return json.loads(response.read().decode("utf-8"))
