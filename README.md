@@ -8,6 +8,8 @@ One can install it using `pip`:
 
 will install the latest version.
 
+Check out the docs [in the wiki](https://github.com/SOBotics/Redunda-lib-Python/wiki) for getting started.
+
 # Changelog
 
 (The Changelog only shows the most recent versions of the library; for all versions, visit [the package on PyPi](https://pypi.python.org/pypi/pyRedunda/))
