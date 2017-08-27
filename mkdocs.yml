@@ -1,0 +1,8 @@
+site_name: pyRedunda
+site_url: https://sobotics.org
+repo_url: https://github.com/SOBotics/pyRedunda
+repo_name: pyRedunda
+site_description: A python library for using Redunda.
+
+pages:
+ - Home: 'index.md'
