@@ -1,6 +1,6 @@
 For this example, we'll be taking the name of the redunda object as `redunda`.
 
-**Uploading and Downloading files specified while constructing the `Redunda` object**
+# Uploading and Downloading files specified while constructing the `Redunda` object
 
 If one has already specified the files one wants to sync with Redunda while constructing the Redunda object, one can upload the files using
 
@@ -12,7 +12,7 @@ and download them using
 
 and the library will download and save them to the location which was specified while uploading them.
 
-**Uploading and Downloading files singlehandedly**
+# Uploading and Downloading files singlehandedly
 
 If one wants to upload or download a file which was not specified while constructing the Redunda object, one can do so manually.
 
