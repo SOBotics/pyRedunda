@@ -1,10 +1,14 @@
 For this example, we'll be taking the name of the Redunda object as `redunda`.
 
+# Sending a status ping
+
 To send a status ping to Redunda, one needs to do
 
     redunda.sendStatusPing()
 
 Once one sends a status ping to Redunda, the library gathers a lot of information from Redunda. I'll be recommending sending a status ping to Redunda once every 60 seconds as if one instance hasn't sent out a status ping for quite a long time, the instance might be declared dead and another instance might take over. 
+
+# Interpreting the information received while sending a status ping
 
 Once the bot sends a status ping to Redunda, the following information is gathered:
 

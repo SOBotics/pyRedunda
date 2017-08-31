@@ -20,6 +20,10 @@ To upload a file, use
 
     redunda.uploadFile("<insert name here>", ispickle=<insert bool here>, at_home=<insert bool here>)
 
+The `uploadFile` function is defined as:
+
+    uploadFile(self, filename, ispickle=False, athome=False)
+
 The first argument is the name of the file, and can also be a path to the file.
 
 The second argument, `ispickle`, is an optional argument which is set to `False` by default. One can set it to `True` if the file to be uploaded is a pickle.

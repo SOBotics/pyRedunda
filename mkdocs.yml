@@ -6,6 +6,9 @@ site_description: A python library for using Redunda.
 
 pages:
  - Home: 'index.md'
- - 'Sending status pings': 'statusping.md'
+ - 'Introduction': 'whatis.md'
+ - 'Installation': 'installation.md'
+ - 'Constructing a Redunda object': 'setup.md'
+ - 'Status pings': 'statusping.md'
  - 'Uploading and Downloading files': 'files.md'
  - 'Handling events': 'events.md' 
