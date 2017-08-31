@@ -8,12 +8,11 @@ One can install it using `pip`:
 
 will install the latest version.
 
-Check out the docs [in the wiki](https://github.com/SOBotics/Redunda-lib-Python/wiki) for getting started.
+The [documentatio is hosted on Read the Docs](http://pyredunda.readthedocs.io/en/latest/)
 
 # Changelog
 
-(The Changelog only shows the most recent versions of the library; for all versions, visit [the package on PyPi](https://pypi.python.org/pypi/pyRedunda/))
-
+ - version 1.0.0: First production release. Basic features have been implemented.
  - version 0.4.1: An attempt to uploading the README to Pypi (o code changes).
  - version 0.4.0: Bugfix and support for uploading and downloading files from and to the home directory.
  - version 0.3.0: Added support for getting events from Redunda
