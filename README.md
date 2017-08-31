@@ -8,7 +8,7 @@ One can install it using `pip`:
 
 will install the latest version.
 
-The [documentatio is hosted on Read the Docs](http://pyredunda.readthedocs.io/en/latest/)
+The [documentation is hosted on Read the Docs](http://pyredunda.readthedocs.io/en/latest/).
 
 # Changelog
 
