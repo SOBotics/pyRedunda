@@ -7,3 +7,4 @@
  - [Status pings](statusping.md)
  - [Uploading and Downloading files](files.md)
  - [Handling Events](events.md)
+ - [Contributors](authors.md)

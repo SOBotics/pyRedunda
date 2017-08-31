@@ -12,7 +12,7 @@ or run
 
 Use the former for a per-user install, while the former for a global install.
 
-Once this is donw, one can import it using
+Once this is done, one can import it using
 
     import pyRedunda
 
