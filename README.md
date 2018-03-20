@@ -12,6 +12,7 @@ The [documentation is hosted on Read the Docs](http://pyredunda.readthedocs.io/e
 
 # Changelog
 
+ - version 1.1.0: Make the filename to be uploaded be the tail of the path specified.
  - version 1.0.0: First production release. Basic features have been implemented.
  - version 0.4.1: An attempt to uploading the README to Pypi (o code changes).
  - version 0.4.0: Bugfix and support for uploading and downloading files from and to the home directory.
